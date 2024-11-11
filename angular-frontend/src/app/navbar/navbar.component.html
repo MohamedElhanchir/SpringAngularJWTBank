@@ -10,25 +10,41 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/accounts">Accounts</a>
+          <a class="nav-link" routerLink="/admin/accounts">Accounts</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Customers
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/customers">Search customers</a></li>
-            <li><a class="dropdown-item" routerLink="/new-customer">New customer</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/customers">Search customers</a></li>
+            <li><a class="dropdown-item" *ngIf="authService.roles.includes('ROLE_ADMIN')" routerLink="/admin/new-customer">New customer</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
+      <!-- User authentication section -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="authService.isAuthenticated">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ authService.username }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown2">
+            <li>
+              <a (click)="handleLogout()" class="dropdown-item text-danger" href="#">
+                Logout
+              </a>
+            </li>
+          </ul>
+
+        </li>
+      </ul>
+
+
+
     </div>
   </div>
 </nav>

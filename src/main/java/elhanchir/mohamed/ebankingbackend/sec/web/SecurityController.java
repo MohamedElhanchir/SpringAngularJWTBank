@@ -39,7 +39,7 @@ public class SecurityController {
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .issuedAt(now)
                 .subject(authentication.getName())
-                .expiresAt(now.plus(60, ChronoUnit.MINUTES))
+                .expiresAt(now.plus(2, ChronoUnit.MINUTES))
                 .claim("scope", scope)
                 .build();
         JwtEncoderParameters jwtEncoderParameters =
